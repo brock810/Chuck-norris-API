@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title style="color: red;">Chuck Norris Jokes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Karantina&display=swap');
+
+    body {
+      font-family: 'Karantina', Arial, sans-serif;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #ffffff; 
+      transition: background-image 0.5s ease; 
+      margin: 0;
+      padding: 0; 
+    
+    }
+
+    h1 {
+      margin-top: 50px;
+      color: red; 
+      font-size: 70px;
+      text-shadow: 2px 2px 4px rgba(0.5, 0, 0, 0.7);
+      transition: color 0.5s ease; 
+      animation: rotate 3s infinite linear;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    #joke {
+      margin-top: 20px;
+      font-size: 47px;
+      font-weight: bold;
+      color: #c00d1c; 
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+      transition: color 0.5s ease; 
+    }
+
+    #get-joke-button {
+      margin-top: 20px;
+      padding: 12px 22px;
+      font-size: 18px;
+      background-color: #0e860e;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease; 
+    }
+
+    #get-joke-button:hover {
+      background-color: #ff0000;
+      transform: scale(1.05);
+    }
+
+
+    .loading {
+      text-align: center;
+      margin-top: 20px;
+      font-style: italic;
+      color: #666666;
+    }
+
+
+    #loading-spinner {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #ffffff; 
+    }
+
+    .share-button {
+      margin-top: 10px;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2, h3, h4, h5, h6 {
+      color: #ffffff; 
+    }
+
+    
+    @keyframes slideIn {
+      0% {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    #joke {
+      animation: slideIn 0.5s ease;
+    }
+
+    #message {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 80px;
+      font-weight: bold;
+      color: red;
+      opacity: 0;
+      animation: slideIn 5s ease-in-out 13s forwards;
+    }
+
+    @keyframes slideIn {
+       0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(50%);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50%);
+      }
+    }
+
+
+    button {
+      margin-top: 10px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ce0e0e;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 25px;
+      transition: background-color 0.3s ease;
+      padding: 10px 20px;
+    }
+
+    
+
+
+    button:hover {
+      background-color: #ff0000;
+      transform: scale(1.05);
+    }
+
+
+    .like-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #0004ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .like-button:hover {
+      background-color: #ff0000;
+      transform: scale(1.05);
+    }
+      
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0; 
+      width: 250px;
+      background-color: #ec0b0b;
+      padding: 20px;
+      color: #d42020;
+      z-index: 9999;
+      cursor: col-resize;
+      overflow: hidden; 
+
+    }
+
+.sidebar h3 {
+  margin-top: 0;
+  color: #000000;
+  font-size: 35px;
+}
+
+.fact {
+  margin-bottom: 15px;
+  cursor: pointer;
+  color: #180404;
+  font-size: 25px;
+}
+
+.fact p {
+  display: none;
+  color: #000000;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+      }
+    }
+
+    .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.image:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+  </style>
+    
+
+
+  <script>
+    const backgrounds = [
+      'https://cdn.wallpapersafari.com/61/10/7Th195.jpg',
+      'https://th.bing.com/th/id/R.29a570101f9ac3d98d3c54b3d11cfbec?rik=D0Pc3ZhbXqAz5Q&riu=http%3a%2f%2fmartialartsactionmovies.com%2fwp-content%2fuploads%2f2015%2f03%2fchuck-norris.jpg&ehk=gpdwLn5dv%2fF2QIifo89v4UTkrVt68bv8KJ9Ul1bmMJc%3d&risl=&pid=ImgRaw&r=0',
+      'https://www.thefamouspeople.com/profiles/images/chuck-norris-3.jpg'
+    ];
+
+    function getRandomBackground() {
+      const randomIndex = Math.floor(Math.random() * backgrounds.length);
+      return backgrounds[randomIndex];
+    }
+
+    function changeBackground() {
+      const body = document.body;
+      body.style.opacity = '0'; 
+      setTimeout(() => {
+        body.style.backgroundImage = `url('${getRandomBackground()}')`;
+        body.style.opacity = '1'; 
+      }, 500);
+    }
+
+    function showLoading() {
+      document.getElementById('get-joke-button').disabled = true;
+      document.getElementById('loading-spinner').style.display = 'inline';
+    }
+
+    function hideLoading() {
+      document.getElementById('get-joke-button').disabled = false;
+      document.getElementById('loading-spinner').style.display = 'none';
+    }
+
+    function shareJoke() {
+      const joke = document.getElementById('joke').textContent;
+      const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(joke)}`;
+      window.open(tweetUrl, '_blank');
+    }
+
+    function copyJoke() {
+      const joke = document.getElementById('joke').textContent;
+      navigator.clipboard.writeText(joke)
+        .then(() => {
+          alert('Joke copied to clipboard!');
+        })
+        .catch((error) => {
+          console.error('Failed to copy joke to clipboard:', error);
+        });
+    }
+
+    const localization = {
+      en: {
+        title: 'Chuck Norris Jokes',
+        getJokeButton: 'Get Joke',
+        loadingSpinner: 'Loading...',
+        shareButton: 'Share Joke',
+        copyButton: 'Copy Joke',
+        likeButton: 'Like Joke',
+        message: 'YOU BETTER NOT HAVE LAUGHED',
+        errorMessage: 'Error: Failed to fetch joke',
+      },
+      es: {
+        title: 'Chistes de Chuck Norris',
+        getJokeButton: 'Obtener Chiste',
+        loadingSpinner: 'Cargando...',
+        shareButton: 'Compartir Chiste',
+        copyButton: 'Copiar Chiste',
+        likeButton: 'Me Gusta',
+        message: 'ES MEJOR QUE NO TE HAYAS REÍDO',
+        errorMessage: 'Error: No se pudo obtener el chiste',
+      },
+    };
+    
+    
+    function setLocalizedText() {
+      const lang = localStorage.getItem('lang') || 'en';
+
+      document.title = localization[lang].title;
+      document.getElementById('get-joke-button').textContent = localization[lang].getJokeButton;
+      document.getElementById('loading-spinner').textContent = localization[lang].loadingSpinner;
+      document.getElementsByClassName('share-button')[0].textContent = localization[lang].shareButton;
+      document.getElementsByClassName('copy-button')[0].textContent = localization[lang].copyButton;
+      document.getElementsByClassName('like-button')[0].textContent = localization[lang].likeButton;
+      document.getElementById('message').textContent = localization[lang].message;
+    }
+
+    
+    function switchLanguage(lang) {
+      localStorage.setItem('lang', lang);
+      setLocalizedText();
+    }
+
+    function likeJoke() {
+      const joke = document.getElementById('joke').textContent;
+      
+      alert(`Joke "${joke}" liked!`);
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const facts = document.querySelectorAll('.fact');
+
+      facts.forEach(function(fact) {
+        fact.addEventListener('click', function() {
+          const answer = this.querySelector('p');
+          answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+        });
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', function () {
+      const sidebar = document.querySelector('.sidebar');
+      let isResizing = false;
+      let lastClientX = 0;
+
+      sidebar.addEventListener('mousedown', function (e) {
+        isResizing = true;
+        lastClientX = e.clientX;
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        if (!isResizing)
+          return;
+
+        const delta = e.clientX - lastClientX;
+        const sidebarWidth = parseFloat(getComputedStyle(sidebar).width);
+
+        sidebar.style.width = sidebarWidth + delta + 'px';
+        lastClientX = e.clientX;
+      });
+
+      document.addEventListener('mouseup', function () {
+        isResizing = false;
+      });
+    });
+
+    function initializePage() {
+      setLocalizedText();
+      changeBackground();
+      fetchJoke();
+      setTimeout(() => {
+        const messageElement = document.getElementById('message');
+        messageElement.style.display = 'block';
+      }, 10000);
+      setTimeout(() => {
+        const title = document.querySelector('h1');
+        title.style.animation = 'none'; 
+      }, 10000); 
+    }
+
+    function likeJoke() {
+      const joke = jokeElement.textContent;
+      
+      alert(`Joke "${joke}" liked! Chuck Norris approves this message.`);
+    }
+
+
+    document.getElementById('get-joke-button').addEventListener('click', fetchJoke);
+    document.getElementById('like-button').addEventListener('click', () => {
+      likeJoke();
+      messageElement.style.display = 'block';
+      messageElement.textContent = 'Chuck Norris approves this message.';
+    });
+
+    document.addEventListener('DOMContentLoaded', initializePage);
+
+
+    document.getElementById('joke').textContent = joke;
+
+
+  </script>
+</head>
+<body>
+  <h1>Chuck Norris Jokes</h1>
+  <button id="get-joke-button" onclick="fetchJoke(); changeBackground();">Get Joke</button>
+  <p id="joke"></p>
+  <p id="loading-spinner">Loading...</p>
+  <button class="share-button" onclick="shareJoke()">Share Joke</button>
+  <button class="copy-button" onclick="copyJoke()">Copy Joke</button>
+  <button class="like-button" onclick="likeJoke()">Like Joke</button>
+
+  <div id="message">YOU BETTER NOT HAVE LAUGHED</div>
+  
+  <div>
+    <button onclick="switchLanguage('en')">English</button>
+    <button onclick="switchLanguage('es')">Español</button>
+  </div>
+
+  <div class="sidebar">
+    <h3>Chuck Norris Facts</h3>
+    <div class="fact">
+      <h4>Fact 1: Is Chuck Norris immortal?</h4>
+      <p>Chuck Norris is not immortal, but Death is too afraid to tell him.</p>
+    </div>
+    <div class="fact">
+      <h4>Fact 2: How many push-ups can Chuck Norris do?</h4>
+      <p>Chuck Norris doesn't do push-ups, he pushes the Earth down.</p>
+    </div>
+    <div class="fact">
+      <h4>Fact 3: Can Chuck Norris win a staring contest?</h4>
+      <p>Yes, Chuck Norris can win a staring contest with a statue.</p>
+    </div>
+    <div class="fact">
+      <h4>Fact 4: Can Chuck Norris count to infinity?</h4>
+      <p>Chuck Norris counted to infinity twice.</p>
+    </div>
+    <div class="fact">
+      <h4>Fact 5: Can Chuck Norris slam a revolving door?</h4>
+      <p>Yes, Chuck Norris can slam a revolving door.</p>
+    </div>
+    <div class="fact">
+      <h4>Fact 6: Is Chuck Norris afraid of the dark?</h4>
+      <p>No, the dark is afraid of Chuck Norris.</p>
+    </div>
+    <div class="fact">
+      <h4>Fact 7: Can Chuck Norris hear sign language?</h4>
+      <p>Yes, Chuck Norris can hear sign language.</p>
+    </div>
+    <div class="fact">
+      <h4>Fact 8: Can Chuck Norris lick his elbow?</h4>
+      <p>No, but Chuck Norris can make his elbow lick itself.</p>
+    </div>
+    <div class="fact">
+      <h4>Fact 9: Can Chuck Norris do a roundhouse kick underwater?</h4>
+      <p>No, water wouldn't dare to get in Chuck Norris' way.</p>
+    </div>
+    <div class="fact">
+      <h4>Fact 10: Can Chuck Norris kill two stones with one bird?</h4>
+      <p>Yes, Chuck Norris can kill two stones with one bird.</p>
+    </div>
+  </div>
+
+
+  <script>
+
+setLocalizedText();
+
+
+setTimeout(() => {
+      const messageElement = document.getElementById('message');
+      messageElement.style.display = 'block';
+    }, 10000);
+
+
+ setTimeout(() => {
+      const title = document.querySelector('h1');
+      title.style.animation = 'none'; 
+    }, 10000); 
+
+
+    const jokeElement = document.getElementById('joke');
+    const loadingElement = document.getElementById('loading');
+    const messageElement = document.getElementById('message');
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const body = document.body;
+      const storedBackgroundImage = localStorage.getItem('backgroundImage');
+      if (storedBackgroundImage) {
+        body.style.backgroundImage = storedBackgroundImage;
+      } else {
+        changeBackground(); 
+      }
+    });
+   
+    function fetchJoke() {
+      showLoading();
+
+      fetch('https://api.chucknorris.io/jokes/random')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch joke');
+          }
+          return response.json();
+        })
+        .then(data => {
+          jokeElement.style.color = '#ffffff'; 
+          jokeElement.textContent = data.value;
+        })
+        .catch(error => {
+          jokeElement.style.color = 'red'; 
+          jokeElement.textContent = `Error: ${error.message}`;
+        })
+        .finally(() => {
+          hideLoading();
+        });
+    }
+    
+  </script>
+
+
+  </script>
+</body>
+</html>
