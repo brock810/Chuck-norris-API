@@ -5,8 +5,8 @@ HTML Structure:
 The HTML structure defines the layout and elements of the web page. Here are the key elements in the code:
 <head> Contains the metadata and external resources used in the page, such as the title, stylesheets, and scripts.
 <body>: Represents the main content of the page.
-CSS Styling:
-  
+
+  CSS Styling:  
 The CSS code defines the styles and layout for various elements in the page. It is used to control the appearance and animations. Here are the main CSS styles used:
 body: Sets the background image, font family, text color, and other properties.
 h1: Styles the title of the page, including the font size, color, and animation.
@@ -18,8 +18,8 @@ h1: Styles the title of the page, including the font size, color, and animation.
 .sidebar: Styles the sidebar that displays Chuck Norris facts, including its width, background color, and font color.
 .fact: Styles each individual fact in the sidebar, including the font size and color.
 .image: Styles the images in the container, including the width, height, and border radius.
-JavaScript Functionality:
 
+JavaScript Functionality:
 The JavaScript code provides the functionality for the Chuck Norris Jokes application. Here are the key JavaScript functions and their purposes:
 getRandomBackground(): Returns a random background image URL from the backgrounds array.
 changeBackground(): Changes the background image of the page by updating the CSS background-image property.
