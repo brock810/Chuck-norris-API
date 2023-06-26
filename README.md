@@ -3,7 +3,7 @@ The code is an HTML page showing Chuck Norris jokes. It has a button to fetch jo
 HTML Structure:
 
 The HTML structure defines the layout and elements of the web page. Here are the key elements in the code:
-<head>: Contains the metadata and external resources used in the page, such as the title, stylesheets, and scripts.
+<head> Contains the metadata and external resources used in the page, such as the title, stylesheets, and scripts.
 <body>: Represents the main content of the page.
 CSS Styling:
   
